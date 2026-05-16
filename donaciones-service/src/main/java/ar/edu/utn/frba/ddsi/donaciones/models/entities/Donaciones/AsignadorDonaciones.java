@@ -25,7 +25,7 @@ public class AsignadorDonaciones {
         }
         return instanciaUnica;
     }
-
+    //todo agregar una lista de donacion las cuales no tienen asignado una entidad
     public void asignarDonacion(Donacion donacion) {
         for (EntidadBeneficiaria entidad : entidades) {
             for (Necesidad necesidad : entidad.getNecesidades()) {

@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class SegmentadorDonaciones {
 
-    public List<Donacion> segmentar(PersonaDonante donante, List<Bien> bienesRecibidos) {
+    public List<Donacion> segmentar(PersonaDonante donante, List<Bien> bienesRecibidos, String descripcionGeneral) {
         Map<String, List<Bien>> grupos = new HashMap<>();
 
         for (Bien bien : bienesRecibidos) {
@@ -28,7 +28,7 @@ public class SegmentadorDonaciones {
         List<Donacion> donacionesSegmentadas = new ArrayList<>();
 
         for (List<Bien> bienesDelGrupo : grupos.values()) {
-            Donacion nuevaDonacion = crearDonacion(donante, bienesDelGrupo);
+            Donacion nuevaDonacion = crearDonacion(donante, bienesDelGrupo, descripcionGeneral);
             donacionesSegmentadas.add(nuevaDonacion);
         }
 
@@ -48,13 +48,15 @@ public class SegmentadorDonaciones {
         return clave;
     }
 
-    private Donacion crearDonacion(PersonaDonante donante, List<Bien> bienesDelGrupo) {
+    private Donacion crearDonacion(PersonaDonante donante, List<Bien> bienesDelGrupo, String descripcionGeneral) {
         SubcategoriaBien sub = bienesDelGrupo.get(0).getSubcategoria();
+
+        String descripcionFinal = descripcionGeneral + " (Segmento: " + sub.getNombre() + ")";
 
         return new Donacion(
                 donante,
                 null,
-                "Segmento de donación: " + sub.getNombre(),
+                descripcionFinal,
                 bienesDelGrupo,
                 Estados.EN_DEPOSITO,
                 sub,
