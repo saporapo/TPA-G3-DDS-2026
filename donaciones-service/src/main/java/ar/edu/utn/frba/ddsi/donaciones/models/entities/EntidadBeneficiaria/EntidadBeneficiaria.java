@@ -37,9 +37,4 @@ public class EntidadBeneficiaria {
                 .flatMap(necesidad -> necesidad.getDonaciones().stream())
                 .toList();
     }
-
-    public void confirmarRecepcion(Donacion donacion){
-
-
-    }
 }
